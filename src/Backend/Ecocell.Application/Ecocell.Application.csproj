@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ecocell.Domain\Ecocell.Domain.csproj" />
+    <ProjectReference Include="..\..\Shared\Ecocell.Communication\Ecocell.Communication.csproj" />
+    <ProjectReference Include="..\..\Shared\Ecocell.Exceptions\Ecocell.Exceptions.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
