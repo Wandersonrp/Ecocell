@@ -2,7 +2,7 @@ using FluentMigrator;
 
 namespace Ecocell.Infrastructure.Migrations.Versions;
 
-[Migration((long)VersionsNumber.CreatePersonTable, "Create Person table")]
+[Migration((long)VersionsNumber.CreateUserTable, "Create User table")]
 public class Version0000001 : Migration
 {
     public override void Down()
