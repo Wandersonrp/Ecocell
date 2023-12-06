@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\Shared\Ecocell.Communication\Ecocell.Communication.csproj" />
     <ProjectReference Include="..\Ecocell.Application\Ecocell.Application.csproj" />
     <ProjectReference Include="..\..\Shared\Ecocell.Exceptions\Ecocell.Exceptions.csproj" />
+    <ProjectReference Include="..\Ecocell.Infrastructure\Ecocell.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
