@@ -20,6 +20,7 @@ public class Version0000001 : Migration
             .WithColumn("Email").AsString(50).NotNullable()
             .WithColumn("Document").AsString(50).NotNullable()
             .WithColumn("Password").AsString(512).NotNullable()
+            .WithColumn("Role").AsInt32().NotNullable().WithDefaultValue(0)
             .WithColumn("Cellphone").AsString(20).NotNullable()
             .WithColumn("IsActive").AsBoolean().NotNullable();
 
@@ -32,8 +33,7 @@ public class Version0000001 : Migration
 
         Create.Table("NaturalPerson")
             .WithColumn("UserId").AsInt64().ForeignKey("User", "Id").NotNullable().PrimaryKey().Identity()    
-            .WithColumn("IsDiscarding").AsBoolean().NotNullable()
-            .WithColumn("Role").AsString(1).NotNullable()
+            .WithColumn("IsDiscarding").AsBoolean().NotNullable()            
             .WithColumn("BirthDate").AsDateTime().NotNullable();
     }
 }
