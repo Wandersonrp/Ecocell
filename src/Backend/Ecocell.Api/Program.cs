@@ -1,3 +1,7 @@
+using System.Net;
+using Ecocell.Api.Filters;
+using Ecocell.Application;
+using Ecocell.Application.Services.AutoMapper;
 using Ecocell.Domain.Extension;
 using Ecocell.Infrastructure;
 using Ecocell.Infrastructure.Migrations;
@@ -11,6 +15,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRepository(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionsFilter)));
+
+builder.Services.AddScoped(provider => new AutoMapper.MapperConfiguration(config =>
+{
+    config.AddProfile(new AutoMapperConfiguration());
+}).CreateMapper());
 
 var app = builder.Build();
 
@@ -23,6 +35,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
+
+app.MapControllers();
+
 UpdateDatabase();
 
 app.Run();
@@ -31,7 +47,7 @@ void UpdateDatabase()
 {
     var connectionString = builder.Configuration.GetConnectionString();
     var databaseName = builder.Configuration.GetDatabaseName();
-    
+
     Database.CreateDatabase(connectionString, databaseName);
     app.MigrateDatabase();
 }
