@@ -9,6 +9,8 @@ using Ecocell.Infrastructure.Migrations.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRouting(option => option.LowercaseUrls=true);
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,6 +40,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UsePathBase(new PathString("/api/v1"));
 
 UpdateDatabase();
 

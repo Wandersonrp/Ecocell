@@ -43,7 +43,7 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
         {
             RuleFor(c => c.Cellphone).Custom((cellphone, context) => 
             {
-                string cellphonePattern = "[0-9]{2} [1-9]{1} [0-9]{4}-[0-9]{4}";
+                string cellphonePattern = "[0-9]{2} [1-9]{1} [0-9]{8}";
                 var isMatch = Regex.IsMatch(cellphone, cellphonePattern);
 
                 if(!isMatch)

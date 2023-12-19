@@ -32,7 +32,7 @@ public class RequestRegisterUser
     public char Type { get; set; } = 'N';
 
     [JsonPropertyName("is_active")]
-    public bool IsActive { get; set; } = true;    
+    public bool? IsActive { get; set; } = true;    
         
     [JsonPropertyName("discarding")]   
     public bool IsDiscarding { get; set; }
@@ -41,6 +41,5 @@ public class RequestRegisterUser
     public bool? IsCollectPoint { get; set; } = false;    
 
     [JsonPropertyName("collector")]
-    public bool? IsCollector { get; set; } = false;
-    
+    public bool? IsCollector { get; set; } = false;    
 }

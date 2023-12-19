@@ -37,6 +37,6 @@ public class Version0000001 : Migration
         Create.Table("NaturalPersons")
             .WithColumn("Id").AsInt64().ForeignKey("Users", "Id").NotNullable().PrimaryKey()    
             .WithColumn("IsDiscarding").AsBoolean().NotNullable()            
-            .WithColumn("BirthDate").AsDateTime().NotNullable();
+            .WithColumn("BirthDate").AsDate().NotNullable();
     }
 }
