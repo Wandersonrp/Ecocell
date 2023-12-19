@@ -45,5 +45,12 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
         var userExistsWithTheSameEmail = await _context.Users.AnyAsync(user => user.Email.Equals(email));
 
         return userExistsWithTheSameEmail;
-    }   
+    }
+
+    public async Task<bool> UserExistsWithTheSameDocument(string document)
+    {
+        var userExistsWithTheSameDocument = await _context.Users.AnyAsync(user => user.Document.Equals(document));
+
+        return userExistsWithTheSameDocument;
+    }
 }

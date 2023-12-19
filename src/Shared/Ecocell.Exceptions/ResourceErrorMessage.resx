@@ -201,4 +201,12 @@
     <value>The user type is invalid.</value>
     <comment/>
   </data>
+  <data name="EMAIL_ALREADY_EXISTS" xml:space="preserve">
+    <value>The informed email already exists.</value>
+    <comment/>
+  </data>
+  <data name="DOCUMENT_ALREADY_EXISTS" xml:space="preserve">
+    <value>The informed document already exists.</value>
+    <comment/>
+  </data>
 </root>

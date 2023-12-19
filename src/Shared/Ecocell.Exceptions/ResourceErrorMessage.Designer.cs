@@ -231,13 +231,30 @@ namespace Ecocell.Exceptions {
             }
         }
 
-        // INVALID_USER_TYPE
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The user type is invalid..
         /// </summary>
         public static string INVALID_USER_TYPE {
             get {
                 return ResourceManager.GetString("INVALID_USER_TYPE", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The informed email already exists..
+        /// </summary>
+        public static string EMAIL_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The informed document already exists..
+        /// </summary>
+        public static string DOCUMENT_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("DOCUMENT_ALREADY_EXISTS", resourceCulture);
             }
         }
     }
