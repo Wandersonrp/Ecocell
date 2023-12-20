@@ -209,4 +209,24 @@
     <value>The informed document already exists.</value>
     <comment/>
   </data>
+  <data name="EMPTY_MATERIAL_DESCRIPTION" xml:space="preserve">
+    <value>The material description is required.</value>
+    <comment/>
+  </data>
+  <data name="DESCRIPTION_MAX_LENGTH" xml:space="preserve">
+    <value>The material description must have at most 50 (fifty) characters.</value>
+    <comment/>
+  </data>
+  <data name="EMPTY_MATERIAL_TYPE" xml:space="preserve">
+    <value>The material type is required.</value>
+    <comment/>
+  </data>
+  <data name="MATERIAL_MIN_WEIGHT" xml:space="preserve">
+    <value>The material weight can not be 0.</value>
+    <comment/>
+  </data>
+  <data name="MATERIAL_MIN_QUANTITY" xml:space="preserve">
+    <value>The material quantity can not be 0.</value>
+    <comment/>
+  </data>
 </root>

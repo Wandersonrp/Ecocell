@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ecocell.Domain.Entities.UserApp;
+using Ecocell.Domain.Entities;
 
 namespace Ecocell.Infrastructure.Context;
 
@@ -10,6 +11,7 @@ public class EcocellContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<LegalPerson> LegalPerson { get; set; }
     public DbSet<NaturalPerson> NaturalPerson { get; set; }
+    public DbSet<EletronicMaterial> EletronicMaterials { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

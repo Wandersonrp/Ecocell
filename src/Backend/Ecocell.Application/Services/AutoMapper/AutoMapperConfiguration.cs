@@ -10,6 +10,8 @@ public class AutoMapperConfiguration : Profile
             .ForMember(destiny => destiny.Password, config => config.Ignore());
 
         CreateMap<Communication.Request.UserApp.RequestRegisterUser, Domain.Entities.UserApp.NaturalPerson>()
-            .ForMember(destiny => destiny.Password, config => config.Ignore());              
+            .ForMember(destiny => destiny.Password, config => config.Ignore());
+
+        CreateMap<Communication.Request.EletronicMaterial.RequestRegisterEletronicMaterial, Domain.Entities.EletronicMaterial>();             
     }
 }

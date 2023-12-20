@@ -257,5 +257,50 @@ namespace Ecocell.Exceptions {
                 return ResourceManager.GetString("DOCUMENT_ALREADY_EXISTS", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The discarding field is required..
+        /// </summary>
+        public static string EMPTY_MATERIAL_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("EMPTY_MATERIAL_DESCRIPTION", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The material description must have at most 50 (fifty) characters..
+        /// </summary>
+        public static string DESCRIPTION_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_MAX_LENGTH", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The material type is required..
+        /// </summary>
+        public static string EMPTY_MATERIAL_TYPE {
+            get {
+                return ResourceManager.GetString("EMPTY_MATERIAL_TYPE", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The material weight can not be 0..
+        /// </summary>
+        public static string MATERIAL_MIN_WEIGHT {
+            get {
+                return ResourceManager.GetString("MATERIAL_MIN_WEIGHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The material quantity can not be 0..
+        /// </summary>
+        public static string MATERIAL_MIN_QUANTITY {
+            get {
+                return ResourceManager.GetString("MATERIAL_MIN_QUANTITY", resourceCulture);
+            }
+        }
     }
 }

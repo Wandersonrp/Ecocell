@@ -9,6 +9,8 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Ecocell.Domain.Repository.EletronicMaterial;
+using Ecocell.Infrastructure.Context.Repository.EletronicMaterial;
 
 namespace Ecocell.Infrastructure;
 
@@ -34,6 +36,9 @@ public static class Bootstrapper
     {
         services.AddScoped<IUserReadOnlyRepository, UserRepository>()
             .AddScoped<IUserWriteOnlyRepository, UserRepository>();
+
+        services.AddScoped<IEletronicMaterialWriteOnlyRepository, EletronicMaterialRepository>()
+            .AddScoped<IUserWriteOnlyRepository, UserRepository>();   
     }
 
     private static void AddWorkUnity(IServiceCollection services)
