@@ -11,8 +11,10 @@ public class RegisterEletronicMaterialController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterEletronicMaterial), StatusCodes.Status201Created)]
-    public async Task<IActionResult> RegisterEletronicMaterial([FromBody] RequestRegisterEletronicMaterial request, [FromServices] IRegisterEletronicMaterialUseCase useCase)
+    public async Task<IActionResult> RegisterEletronicMaterial([FromBody] RequestRegisterEletronicMaterial request, [FromServices] AuthApiIdentity auth, [FromServices] IRegisterEletronicMaterialUseCase useCase, [FromHeader(Name = "Authorization")] string? token = null)
     {
+        if(!auth.ReturnUnauthorizedMessage(token, out var result)) return result;
+
         var response = await useCase.Execute(request);
 
         return CreatedAtAction(nameof(RegisterEletronicMaterial), response);

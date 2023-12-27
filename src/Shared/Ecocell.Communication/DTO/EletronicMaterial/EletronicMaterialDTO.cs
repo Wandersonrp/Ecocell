@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Ecocell.Communication.DTO.EletronicMaterial;
 
-public class EletronicMaterialDTO
+public record EletronicMaterialDTO
 {    
     public long Id { get; set; }        
     public string Description { get; set; }

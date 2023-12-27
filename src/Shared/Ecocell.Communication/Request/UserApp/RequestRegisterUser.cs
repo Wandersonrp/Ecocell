@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 
 namespace Ecocell.Communication.Request.UserApp;
 
@@ -8,16 +9,17 @@ public class RequestRegisterUser
     public string Name { get; set; }
 
     [JsonPropertyName("company_name")]
-    public string? CompanyName { get;  set; }
+    public string? CompanyName { get; set; } = null;
 
     [JsonPropertyName("email")]
     public string Email { get; set; }
 
     [JsonPropertyName("document")]
-    public string Document { get; set; }  
+    public string Document { get; set; }
 
     [JsonPropertyName("birth_date")]
-    public DateTime? BirthDate { get; set; }  
+    [Newtonsoft.Json.JsonConverter(typeof(IsoDateTimeConverter), "yyyy-MM-dd")]
+    public DateTime? BirthDate { get; set; }
 
     [JsonPropertyName("role")]
     public short Role { get; set; } 
@@ -32,10 +34,10 @@ public class RequestRegisterUser
     public char Type { get; set; } = 'N';
 
     [JsonPropertyName("is_active")]
-    public bool? IsActive { get; set; } = true;    
-        
-    [JsonPropertyName("discarding")]   
-    public bool IsDiscarding { get; set; }
+    public bool? IsActive { get; set; } = true;
+
+    [JsonPropertyName("discarding")]
+    public bool? IsDiscarding { get; set; } = false;
 
     [JsonPropertyName("collect_point")]
     public bool? IsCollectPoint { get; set; } = false;    

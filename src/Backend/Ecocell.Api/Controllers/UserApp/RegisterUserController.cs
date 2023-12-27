@@ -9,10 +9,12 @@ namespace Ecocell.Api.Controllers.UserApp;
 [Route("/signup")]
 public class RegisterUserController : ControllerBase
 {
-    [HttpPost]
+    [HttpPost]    
     [ProducesResponseType(typeof(ResponseRegisterUser), StatusCodes.Status201Created)]
-    public async Task<IActionResult> RegisterUser([FromServices] IRegisterUserUseCase useCase, [FromBody] RequestRegisterUser request)
+    public async Task<IActionResult> RegisterUser([FromServices] IRegisterUserUseCase useCase, [FromServices] AuthApiIdentity auth, [FromBody] RequestRegisterUser request, [FromHeader(Name = "Authorization")] string? token = null)
     {        
+        if(!auth.ReturnUnauthorizedMessage(token, out var result)) return result;
+        
         var response = await useCase.Execute(request);
 
         return CreatedAtAction(nameof(RegisterUser), response);

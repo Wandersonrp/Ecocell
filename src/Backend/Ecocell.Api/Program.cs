@@ -1,4 +1,4 @@
-using System.Net;
+using Ecocell.Api;
 using Ecocell.Api.Filters;
 using Ecocell.Application;
 using Ecocell.Application.Services.AutoMapper;
@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddRepository(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddApi(builder.Configuration);
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionsFilter)));
 
