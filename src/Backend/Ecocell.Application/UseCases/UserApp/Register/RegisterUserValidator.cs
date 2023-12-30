@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Ecocell.Communication.Request.UserApp;
 using Ecocell.Exceptions;
@@ -8,7 +9,7 @@ namespace Ecocell.Application.UseCases.UserApp.Register;
 public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
 {
     public RegisterUserValidator()
-    {
+    {        
         RuleFor(c => c.Name).NotEmpty().WithMessage(ResourceErrorMessage.EMPTY_USER_NAME);        
         RuleFor(c => c.Document).NotEmpty().WithMessage(ResourceErrorMessage.EMPTY_DOCUMENT);                
         RuleFor(c => c.Email).NotEmpty().WithMessage(ResourceErrorMessage.EMPTY_EMAIL);
@@ -27,10 +28,32 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
             RuleFor(c => c.Email).EmailAddress().WithMessage(ResourceErrorMessage.INVALID_EMAIL);
         });
 
-        When(c => !string.IsNullOrWhiteSpace(c.Document), () =>
+        When(c => c.Type == 'N' && !string.IsNullOrWhiteSpace(c.Document), () =>
         {
-            RuleFor(c => c.Document.Length).GreaterThanOrEqualTo(11).WithMessage(ResourceErrorMessage.DOCUMENT_MIN_LENGTH);
-            RuleFor(c => c.Document.Length).LessThanOrEqualTo(14).WithMessage(ResourceErrorMessage.DOCUMENT_MAX_LENGTH);
+            RuleFor(c => c.Document).Custom((document, context) =>
+            {
+                if(document.Length < 11) 
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(document), ResourceErrorMessage.DOCUMENT_MIN_LENGTH));
+                } else if(document.Length > 11)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(document), ResourceErrorMessage.DOCUMENT_MAX_LENGTH));
+                }
+            });
+        });
+
+        When(c => c.Type == 'L' && !string.IsNullOrWhiteSpace(c.Document), () =>
+        {
+            RuleFor(c => c.Document).Custom((document, context) =>
+            {
+                if(document.Length < 14) 
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(document), ResourceErrorMessage.DOCUMENT_MIN_LENGTH));
+                } else if(document.Length > 14)
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(document), ResourceErrorMessage.DOCUMENT_MAX_LENGTH));
+                }
+            });
         });
 
         When(c => !string.IsNullOrWhiteSpace(c.Password), () => 
@@ -43,7 +66,7 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
         {
             RuleFor(c => c.Cellphone).Custom((cellphone, context) => 
             {
-                string cellphonePattern = "[0-9]{2} [1-9]{1} [0-9]{8}";
+                string cellphonePattern = "^[0-9]{2} [9]{1} [0-9]{8}$";
                 var isMatch = Regex.IsMatch(cellphone, cellphonePattern);
 
                 if(!isMatch)
@@ -70,6 +93,27 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
                     context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(birthDate), ResourceErrorMessage.INVALID_MIN_BIRTH_DATE));
                 }
             });
-        });   
-    }
+        });
+
+        When(c => !string.IsNullOrEmpty(c.Type.ToString()), () =>
+        {
+            RuleFor(c => c.Type).Custom((type, context) =>
+            {
+                if(type != 'N' && type != 'L')
+                {
+                    context.AddFailure(new FluentValidation.Results.ValidationFailure(nameof(type), ResourceErrorMessage.INVALID_USER_TYPE));
+                }
+            });
+        });
+
+        When(c => c.Type == 'L', () =>
+        {
+            RuleFor(c => c.CompanyName).NotEmpty().WithMessage(ResourceErrorMessage.EMPTY_COMPANY_NAME);
+        });
+
+        When(c => !string.IsNullOrWhiteSpace(c.CompanyName), () =>
+        {
+            RuleFor(c => c.CompanyName.Length).LessThanOrEqualTo(100).WithMessage(ResourceErrorMessage.COMPANY_NAME_MAX_LENGTH);
+        });
+    }    
 }
