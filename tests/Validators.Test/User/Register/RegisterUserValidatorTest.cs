@@ -131,12 +131,19 @@ public class RegisterUserValidatorTest
         result.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals(ResourceErrorMessage.INVALID_USER_TYPE));
     }
 
-    [Fact]
-    public void Validate_Error_Password_Min_Length()
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(6)]
+    [InlineData(7)]
+    public void Validate_Error_Password_Min_Length(short passwordLength)
     {
         var validator = new RegisterUserValidator();
 
-        var request = RequestRegisterUserBuilder.NaturalPersonBuilder(passwordLength: 5);
+        var request = RequestRegisterUserBuilder.NaturalPersonBuilder(passwordLength);
         
         var result = validator.Validate(request);
 
