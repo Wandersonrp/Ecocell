@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Ecocell.Communication.Request.UserApp;
 using Ecocell.Exceptions;

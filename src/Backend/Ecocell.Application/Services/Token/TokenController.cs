@@ -10,7 +10,7 @@ public class TokenController
     private const string EmailAlias = "eml";
     private readonly double _tokenLifeTimeInMinutes;
     private readonly string _securityKey;
-
+    
     public TokenController(double tokenLifeTimeInMinutes, string securityKey)
     {
         _tokenLifeTimeInMinutes = tokenLifeTimeInMinutes;

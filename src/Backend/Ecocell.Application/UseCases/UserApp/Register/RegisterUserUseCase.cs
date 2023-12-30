@@ -21,6 +21,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly PasswordEncryptor _passwordEncryptor;
     private readonly TokenController _tokenController;
 
+    
     public RegisterUserUseCase(IUserWriteOnlyRepository userWriteOnlyRepository, IUserReadOnlyRepository userReadOnlyRepository, IMapper mapper, IWorkUnity workUnity, PasswordEncryptor passwordEncryptor, TokenController tokenController)
     {
         _userWriteOnlyRepository = userWriteOnlyRepository;

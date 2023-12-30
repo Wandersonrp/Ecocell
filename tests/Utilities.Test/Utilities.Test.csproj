@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Bogus" Version="35.2.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Shared\Ecocell.Communication\Ecocell.Communication.csproj" />
+    <ProjectReference Include="..\..\src\Backend\Ecocell.Domain\Ecocell.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Backend\Ecocell.Application\Ecocell.Application.csproj" />
   </ItemGroup>
 
 </Project>
