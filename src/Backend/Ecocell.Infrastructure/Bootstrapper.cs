@@ -26,10 +26,15 @@ public static class Bootstrapper
 
     private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager) 
     {    
-        services.AddFluentMigratorCore().ConfigureRunner(config => 
-            config.AddSqlServer()
-            .WithGlobalConnectionString(configurationManager.GetFullConnection()).ScanIn(Assembly.Load("Ecocell.Infrastructure")).For.All()
+        bool.TryParse(configurationManager.GetSection("Configuration:InMemoryDatabase").Value, out bool inMemoryDatabase);
+
+        if(!inMemoryDatabase) 
+        {
+            services.AddFluentMigratorCore().ConfigureRunner(config => 
+                config.AddSqlServer()
+                .WithGlobalConnectionString(configurationManager.GetFullConnection()).ScanIn(Assembly.Load("Ecocell.Infrastructure")).For.All()
             );
+        }
     }
 
     private static void AddRepository(IServiceCollection services)
@@ -48,10 +53,15 @@ public static class Bootstrapper
 
     private static void AddContext(IServiceCollection services, IConfiguration configurationManager)
     {
-        var connectionString = configurationManager.GetFullConnection();
+        bool.TryParse(configurationManager.GetSection("Configurations:InMemoryDatabase").Value, out bool inMemoryDatabase);
 
-        services.AddDbContext<EcocellContext>(contextOptions => 
-            contextOptions.UseSqlServer(connectionString)
-        );
+        if(!inMemoryDatabase) 
+        {
+            var connectionString = configurationManager.GetFullConnection();
+
+            services.AddDbContext<EcocellContext>(contextOptions => 
+                contextOptions.UseSqlServer(connectionString)
+            );
+        }
     }
 }

@@ -75,7 +75,7 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
             });
         });
 
-        When(c => c.BirthDate != null, () =>
+        When(c => c.Type == 'N' && c.BirthDate != null, () =>
         {
             RuleFor(c => c.BirthDate).Custom((birthDate, context) =>
             {

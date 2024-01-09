@@ -1,47 +1,47 @@
-using System.Text.Json.Serialization;
-using Newtonsoft.Json.Converters;
+using Ecocell.Communication.Util;
+using Newtonsoft.Json;
 
 namespace Ecocell.Communication.Request.UserApp;
 
 public class RequestRegisterUser
 {
-    [JsonPropertyName("name")]
+    [JsonProperty("name")]
     public string Name { get; set; }
 
-    [JsonPropertyName("company_name")]
+    [JsonProperty("company_name")]
     public string? CompanyName { get; set; } = null;
 
-    [JsonPropertyName("email")]
+    [JsonProperty("email")]
     public string Email { get; set; }
 
-    [JsonPropertyName("document")]
+    [JsonProperty("document")]
     public string Document { get; set; }
 
-    [JsonPropertyName("birth_date")]
-    [Newtonsoft.Json.JsonConverter(typeof(IsoDateTimeConverter), "yyyy-MM-dd")]
+    [JsonProperty("birth_date")]
+    [Newtonsoft.Json.JsonConverter(typeof(CustomDateTimeConverter))]
     public DateTime? BirthDate { get; set; }
 
-    [JsonPropertyName("role")]
+    [JsonProperty("role")]
     public short Role { get; set; } 
 
-    [JsonPropertyName("password")]   
+    [JsonProperty("password")]   
     public string Password { get; set; }
 
-    [JsonPropertyName("phone")]   
+    [JsonProperty("cellphone")]   
     public string Cellphone { get; set; }
 
-    [JsonPropertyName("type")]
+    [JsonProperty("type")]
     public char Type { get; set; } = 'N';
 
-    [JsonPropertyName("is_active")]
+    [JsonProperty("is_active")]
     public bool? IsActive { get; set; } = true;
 
-    [JsonPropertyName("discarding")]
+    [JsonProperty("discarding")]
     public bool? IsDiscarding { get; set; } = false;
 
-    [JsonPropertyName("collect_point")]
+    [JsonProperty("collect_point")]
     public bool? IsCollectPoint { get; set; } = false;    
 
-    [JsonPropertyName("collector")]
+    [JsonProperty("collector")]
     public bool? IsCollector { get; set; } = false;    
 }

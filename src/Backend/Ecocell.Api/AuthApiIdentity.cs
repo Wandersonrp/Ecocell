@@ -40,8 +40,20 @@ public class AuthApiIdentity
     {
         bool isValidToken = true;
 
-        if(token != null)
-            if (_apiIdentity != token.Split(" ")[1]) isValidToken = false;
+        if(token == null)
+        {
+            isValidToken = false;
+            return isValidToken;
+        }
+
+        if(token != null) 
+        {
+            if (_apiIdentity != token.Split(" ")[1]) 
+            {
+                isValidToken = false;
+            }
+        }
+             
 
         return isValidToken;
     }

@@ -11,7 +11,12 @@ public class RegisterUserController : ControllerBase
 {
     [HttpPost]    
     [ProducesResponseType(typeof(ResponseRegisterUser), StatusCodes.Status201Created)]
-    public async Task<IActionResult> RegisterUser([FromServices] IRegisterUserUseCase useCase, [FromServices] AuthApiIdentity auth, [FromBody] RequestRegisterUser request, [FromHeader(Name = "Authorization")] string? token = null)
+    public async Task<IActionResult> RegisterUser(
+        [FromServices] IRegisterUserUseCase useCase,
+        [FromBody] RequestRegisterUser request,
+        [FromServices] AuthApiIdentity auth, 
+        [FromHeader(Name = "Authorization")] string? token = null
+    )
     {        
         if(!auth.ReturnUnauthorizedMessage(token, out var result)) return result;
         

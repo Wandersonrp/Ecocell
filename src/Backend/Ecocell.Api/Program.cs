@@ -4,6 +4,7 @@ using Ecocell.Application;
 using Ecocell.Application.Services.AutoMapper;
 using Ecocell.Domain.Extension;
 using Ecocell.Infrastructure;
+using Ecocell.Infrastructure.Context;
 using Ecocell.Infrastructure.Migrations;
 using Ecocell.Infrastructure.Migrations.Extensions;
 
@@ -50,9 +51,19 @@ app.Run();
 
 void UpdateDatabase()
 {
-    var connectionString = builder.Configuration.GetConnectionString();
-    var databaseName = builder.Configuration.GetDatabaseName();
+    using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    using var context = serviceScope.ServiceProvider.GetService<EcocellContext>();
 
-    Database.CreateDatabase(connectionString, databaseName);
-    app.MigrateDatabase();
+    bool? inMemoryDatabase = context?.Database?.ProviderName?.Equals("Microsoft.EntityFrameworkCore.InMemory");
+
+    if(!inMemoryDatabase.HasValue || !inMemoryDatabase.Value)
+    {
+        var connectionString = builder.Configuration.GetConnectionString();
+        var databaseName = builder.Configuration.GetDatabaseName();
+
+        Database.CreateDatabase(connectionString, databaseName);
+        app.MigrateDatabase();
+    }
 }
+
+public partial class Program { }
